@@ -2,7 +2,7 @@ import boto3
 import StringIO
 import zipfile
 import mimetypes
-    
+
 def lambda_handler(event, context):
     sns = boto3.resource('sns')
     topic = sns.Topic('arn:aws:sns:eu-west-2:940878095277:DeployPortfolioTopic')
@@ -12,11 +12,11 @@ def lambda_handler(event, context):
         "objectKey": 'portfoliobuild.zip'
     }
     try:
-        job = event.get("Codepipeline.job")
+        job = event.get("CodePipeline.job")
         if job:
             for artifact in job["data"]["inputArtifacts"]:
                 if artifact["name"] == "MyAppBuild":
-                    location = artifact["location"]["s3location"]
+                    location = artifact["location"]["s3Location"]
 
         print "Building portfolio from " + str(location)
         s3 = boto3.resource('s3')
