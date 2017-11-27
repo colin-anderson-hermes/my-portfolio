@@ -17,7 +17,10 @@ const myExample = {
 }
 
 describe("ExampleWorkModal component", () => {
-  let component = shallow(<ExampleWorkModal example={myExample} />);
+  let mockCloseModalFn = jest.fn();
+
+  let component = shallow(<ExampleWorkModal example={myExample} open={false} closeModal={mockCloseModalFn}/>);
+  let openComponent = shallow(<ExampleWorkModal example={myExample} open={true} closeModal={mockCloseModalFn}/>);
 
   let anchors = component.find("a");
 
@@ -28,4 +31,14 @@ describe("ExampleWorkModal component", () => {
   it("Should link to our project", () => {
     expect(anchors.getElement(0).props.href).toEqual(myExample.href);
   })
+
+  it("Should have the modal class set correctly", () => {
+    expect(component.find(".background--skyBlue").hasClass("modal--closed")).toBe(true);
+    expect(openComponent.find(".background--skyBlue").hasClass("modal--open")).toBe(true);
+  })
+
+  it("Should call the closeModal handler when clicked", () => {
+    openComponent.find("#closeButton").simulate('click');
+    expect(mockCloseModalFn).toHaveBeenCalled();
+  });
 });
