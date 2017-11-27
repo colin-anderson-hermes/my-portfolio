@@ -38,3 +38,4 @@ class WorkBubble extends React.Component {
 }
 
 export default ExampleWork;
+export { WorkBubble };
