@@ -12,9 +12,9 @@ class ExampleWork extends React.Component {
           })
         }
       </section>
-    )
-  }
-}
+    );
+  };
+};
 
 class WorkBubble extends React.Component {
   render() {
@@ -33,9 +33,9 @@ class WorkBubble extends React.Component {
           </dl>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default ExampleWork;
 export { WorkBubble };
